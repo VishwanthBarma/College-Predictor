@@ -19,3 +19,11 @@ html{
   -webkit-text-fill-color: transparent;
   
 } 
+
+.my-sub-gradient-text {
+  background: #CF0C8E;
+background: linear-gradient(to right, #CF0C8E 0%, #FFBB1C 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+}

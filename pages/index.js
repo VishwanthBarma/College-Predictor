@@ -13,6 +13,9 @@ export default function Home() {
         <meta name="description" content="College Predictor"></meta>
       </Head>
       <div className="flex flex-col r-h items-center justify-center space-y-7">
+        <h1 className="font-bold text-2xl my-sub-gradient-text">
+          TS EAMCET 2022
+        </h1>
         <Link href="/collegepredictor" passHref>
           <button className="hover:scale-105 transition ease-linear active:opacity-50">
             <div className="flex items-center justify-center flex-col space-y-2 bg-neutral-800 rounded-xl h-32 w-52">
