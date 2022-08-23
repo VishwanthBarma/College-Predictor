@@ -1,9 +1,27 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import DisplayTable from "../components/Table/DisplayTable";
+import data from "../public/collegedata.json";
 
 function collegedetails() {
   const router = useRouter();
+  const [colleges, setColleges] = useState(data);
+  const [selectCasts, setSelectCasts] = useState(false);
+  const [selectCourses, setSelectCourses] = useState(false);
+  const [sortBy, setSortBy] = useState("default");
+
+  const handleCourseSelect = (e) => {
+    e.target.value == "1" ? setSelectCourses(true) : setSelectCourses(false);
+  };
+
+  const handleCastSelect = (e) => {
+    e.target.value == "1" ? setSelectCasts(true) : setSelectCasts(false);
+  };
+
+  const handleSort = (e) => {
+    setSortBy(e.target.value);
+  };
   return (
     <div>
       <div className="flex items-center justify-center p-4">
@@ -16,12 +34,103 @@ function collegedetails() {
         <h1 className="font-semibold text-lg">College Details</h1>
       </div>
 
-      <div className="p-10">
-        {/* Search Bar */}
+      <div className="p-5">
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className="bg-neutral-800 rounded-xl items-center flex flex-col p-4"
+        >
+          <div className="flex space-x-4 p-2">
+            <select
+              onChange={(e) => handleCourseSelect(e)}
+              className="bg-black rounded-xl flex-1 h-10 w-36 outline-none"
+            >
+              <option value="0" selected>
+                all courses
+              </option>
+              <option value="1">select course</option>
+            </select>
 
-        {/* Get All college lists */}
+            {selectCourses && (
+              <select
+                name="select courses"
+                multiple
+                className="text-slate-200 outline-none p-2 rounded-xl bg-black h-10 w-36"
+              >
+                <option value="CSE">CSE</option>
+                <option value="CSM">CSM</option>
+                <option value="CIC">CIC</option>
+                <option value="CSD">CSD</option>
+                <option value="CSO">CSO</option>
+                <option value="AIM">AIM</option>
+                <option value="INF">INF</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="MEC">MEC</option>
+                <option value="CIV">CIV</option>
+                <option value="BIO">BIO</option>
+                <option value="MIN">MIN</option>
+                <option value="PHM">PHM</option>
+              </select>
+            )}
+          </div>
+          <div className="flex space-x-4 p-2">
+            <select
+              onChange={(e) => handleCastSelect(e)}
+              className="bg-black rounded-xl flex-1 h-10 w-36 outline-none"
+            >
+              <option value="0" selected>
+                all casts
+              </option>
+              <option value="1">select casts</option>
+            </select>
 
-        {/* sort by */}
+            {selectCasts && (
+              <select
+                name="select casts"
+                multiple
+                className="text-slate-200 outline-none p-2 rounded-xl bg-black h-10 w-36"
+              >
+                <option value="oc">OC</option>
+                <option value="bca">BC_A</option>
+                <option value="bcb">BC_B</option>
+                <option value="bcc">BC_C</option>
+                <option value="bcd">BC_D</option>
+                <option value="bce">BC_E</option>
+                <option value="sc">SC</option>
+                <option value="st">ST</option>
+                <option value="ews">EWS</option>
+              </select>
+            )}
+          </div>
+          <div className="flex items-center space-x-2 mt-2">
+            <label className="font-semibold">Sort rank By : </label>
+            <select
+              className="text-slate-200 outline-none p-2 h-10 w-36 rounded-xl bg-black"
+              onChange={(e) => handleSort(e)}
+            >
+              <option value="default">default</option>
+              <option value="asc">asc</option>
+              <option value="des">des</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            className="bg-sky-500 p-3 w-full rounded-xl font-semibold mt-3"
+          >
+            Submit
+          </button>
+        </form>
+
+        <hr className="my-2 text-slate-300"></hr>
+
+        <div className="flex flex-col items-center justify-center mt-5">
+          <button className="w-full mb-4 font-semibold bg-rose-500 p-2 rounded-xl">
+            Get PDF
+          </button>
+          <div className="w-screen">
+            <DisplayTable data={colleges} />
+          </div>
+        </div>
       </div>
     </div>
   );

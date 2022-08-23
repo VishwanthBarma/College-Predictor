@@ -12,6 +12,10 @@ html{
   height: calc(100vh - 64px);
 }
 
+.r-h2 {
+  height: calc(100vh - 220px);
+}
+
 .my-gradient-text {
   background: #0276CF;
   background: linear-gradient(to right, #0276CF 0%, #05CDFF 100%);
@@ -26,4 +30,26 @@ background: linear-gradient(to right, #CF0C8E 0%, #FFBB1C 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  font-size: 12px;
+  padding: 3px;
+}
+
+th {
+  background-color: rgb(24, 134, 162);
+  color: #ffffff
+}
+
+td {
+  background-color: rgb(215, 240, 255);
+  color:#151515
 }
