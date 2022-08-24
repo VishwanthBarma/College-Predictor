@@ -1,3 +1,4 @@
+import { ThreeBounce } from "better-react-spinkit";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
@@ -7,9 +8,13 @@ import data from "../public/collegedata.json";
 function collegedetails() {
   const router = useRouter();
   const [colleges, setColleges] = useState(data);
+  const [playData, setPlayData] = useState(data);
+  const [courses, setCourses] = useState([]);
+  const [casts, setCasts] = useState([]);
   const [selectCasts, setSelectCasts] = useState(false);
   const [selectCourses, setSelectCourses] = useState(false);
   const [sortBy, setSortBy] = useState("default");
+  const [loading, setLoading] = useState(false);
 
   const handleCourseSelect = (e) => {
     e.target.value == "1" ? setSelectCourses(true) : setSelectCourses(false);
@@ -22,6 +27,35 @@ function collegedetails() {
   const handleSort = (e) => {
     setSortBy(e.target.value);
   };
+
+  const handleCasts = (e) => {
+    const value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    console.log(e.target.selectedOptions);
+    setCasts({ options: value });
+  };
+
+  const hanldeCourses = (e) => {
+    const value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setCourses({ options: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log("clicked");
+    if (courses.length == 0 && casts.length == 0 && sortBy == "default") {
+      setPlayData(colleges);
+    }
+
+    setLoading(false);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-center p-4">
@@ -52,8 +86,8 @@ function collegedetails() {
 
             {selectCourses && (
               <select
-                name="select courses"
-                multiple
+                multiple={true}
+                onChange={(e) => hanldeCourses(e)}
                 className="text-slate-200 outline-none p-2 rounded-xl bg-black h-10 w-36"
               >
                 <option value="CSE">CSE</option>
@@ -86,8 +120,8 @@ function collegedetails() {
 
             {selectCasts && (
               <select
-                name="select casts"
-                multiple
+                onChange={(e) => handleCasts(e)}
+                multiple={true}
                 className="text-slate-200 outline-none p-2 rounded-xl bg-black h-10 w-36"
               >
                 <option value="oc">OC</option>
@@ -115,7 +149,7 @@ function collegedetails() {
           </div>
           <button
             type="submit"
-            className="bg-sky-500 p-3 w-full rounded-xl font-semibold mt-3"
+            className="bg-sky-500 p-3 w-full hover:bg-sky-600 active:bg-sky-400 rounded-xl font-semibold mt-3"
           >
             Submit
           </button>
@@ -127,9 +161,13 @@ function collegedetails() {
           <button className="w-full mb-4 font-semibold bg-rose-500 p-2 rounded-xl">
             Get PDF
           </button>
-          <div className="w-screen">
-            <DisplayTable data={colleges} />
-          </div>
+          {!loading ? (
+            <DisplayTable data={playData} />
+          ) : (
+            <div className="flex items-center justify-center mt-5">
+              <ThreeBounce size={30} color="orange" />
+            </div>
+          )}
         </div>
       </div>
     </div>
