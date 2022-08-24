@@ -1,8 +1,10 @@
 import { ThreeBounce } from "better-react-spinkit";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import DisplayTable from "../components/Table/DisplayTable";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
+import Sample from "../components/Sample";
+import { DisplayTable } from "../components/Table/DisplayTable";
 import data from "../public/collegedata.json";
 
 function collegedetails() {
@@ -14,6 +16,11 @@ function collegedetails() {
   const [selectCourses, setSelectCourses] = useState(false);
   const [sortBy, setSortBy] = useState("default");
   const [loading, setLoading] = useState(false);
+  const componentRef = useRef(null);
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const handleCourseSelect = (e) => {
     e.target.value == "1" ? setSelectCourses(true) : setSelectCourses(false);
@@ -32,7 +39,6 @@ function collegedetails() {
       e.target.selectedOptions,
       (option) => option.value
     );
-    console.log(e.target.selectedOptions);
     setCasts({ options: value });
   };
 
@@ -66,7 +72,7 @@ function collegedetails() {
   };
 
   return (
-    <div>
+    <div className="lg:px-44 xl:px-64">
       <div className="flex items-center justify-center p-4">
         <button
           onClick={router.back}
@@ -146,7 +152,7 @@ function collegedetails() {
             )}
           </div>
           <div className="flex items-center space-x-2 mt-2">
-            <label className="font-semibold">Sort rank By : </label>
+            <label className="font-semibold">Sort Rank : </label>
             <select
               className="text-slate-200 outline-none p-2 h-10 w-36 rounded-xl bg-black"
               onChange={(e) => handleSort(e)}
@@ -167,11 +173,16 @@ function collegedetails() {
         <hr className="my-2 text-slate-300"></hr>
 
         <div className="flex flex-col items-center justify-center mt-5">
-          <button className="w-full mb-4 font-semibold bg-rose-500 p-2 rounded-xl">
-            Get PDF
-          </button>
           {!loading ? (
-            <DisplayTable data={colleges} />
+            <>
+              <button
+                onClick={handlePrint}
+                className="w-full mb-4 active:bg-rose-400 hover:bg-rose-600 font-semibold bg-rose-500 p-2 rounded-xl"
+              >
+                Get PDF
+              </button>
+              <DisplayTable data={colleges} ref={componentRef} />
+            </>
           ) : (
             <div className="flex mt-5">
               <ThreeBounce size={30} color="orange" />
