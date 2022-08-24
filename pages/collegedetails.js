@@ -8,7 +8,6 @@ import data from "../public/collegedata.json";
 function collegedetails() {
   const router = useRouter();
   const [colleges, setColleges] = useState(data);
-  const [playData, setPlayData] = useState(data);
   const [courses, setCourses] = useState([]);
   const [casts, setCasts] = useState([]);
   const [selectCasts, setSelectCasts] = useState(false);
@@ -45,12 +44,22 @@ function collegedetails() {
     setCourses({ options: value });
   };
 
+  // Form Handle Submit - Function
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("clicked");
+
     if (courses.length == 0 && casts.length == 0 && sortBy == "default") {
-      setPlayData(colleges);
+      setColleges(data);
+    }
+
+    if (sortBy == "asc") {
+      const sorted = [...colleges].sort((a, b) => a.oc_boys - b.oc_boys);
+      setColleges(sorted);
+    } else if (sortBy == "des") {
+      const sorted = [...colleges].sort((a, b) => b.oc_boys - a.oc_boys);
+      setColleges(sorted);
     }
 
     setLoading(false);
@@ -162,9 +171,9 @@ function collegedetails() {
             Get PDF
           </button>
           {!loading ? (
-            <DisplayTable data={playData} />
+            <DisplayTable data={colleges} />
           ) : (
-            <div className="flex items-center justify-center mt-5">
+            <div className="flex mt-5">
               <ThreeBounce size={30} color="orange" />
             </div>
           )}
