@@ -4,15 +4,25 @@ import Header from "../components/Layout/Header";
 import { MdLibraryBooks } from "react-icons/md";
 import { TbChartInfographic } from "react-icons/tb";
 import Link from "next/link";
+import { BsGithub } from "react-icons/bs";
 
 export default function Home() {
   return (
     <div>
       <Head>
         <title>Create Next App</title>
-        <meta name="description" content="College Predictor"></meta>
+        <meta
+          name="description"
+          content="TS-EAMCET-2022 College Predictor and Details"
+        ></meta>
       </Head>
-      <div className="flex flex-col r-h items-center justify-center space-y-7">
+      <div className="flex items-center justify-center mt-5 space-x-3">
+        <h1 className="text-center text-neutral-500">App under development.</h1>
+        <a href="https://github.com/VishwanthBarma/College-Predictor">
+          <BsGithub className="h-5 w-5 hover:h-7 hover:w-7 cursor-pointer text-slate-400" />
+        </a>
+      </div>
+      <div className="flex flex-col r-h items-center mt-32 space-y-7">
         <h1 className="font-bold text-2xl my-sub-gradient-text">
           TS EAMCET 2022
         </h1>

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import StudentForm from "../components/Predictor/StudentForm";
 
 function collegepredictor() {
   const router = useRouter();
@@ -14,6 +15,9 @@ function collegepredictor() {
           <BsFillArrowLeftCircleFill className="h-8 w-8" />
         </button>
         <h1 className="font-semibold text-lg">College Predictor</h1>
+      </div>
+      <div className="flex flex-col items-center m-3 justify-center">
+        <StudentForm />
       </div>
     </div>
   );
