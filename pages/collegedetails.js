@@ -4,9 +4,9 @@ import React, { useRef, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useReactToPrint } from "react-to-print";
 import { data } from "../asserts/data";
-import { DisplayTable } from "../components/Table/DisplayTable";
+import DisplayTable from "../components/Table/DisplayTable";
 
-function collegedetails() {
+function Collegedetails() {
   const router = useRouter();
   const [colleges, setColleges] = useState(data);
   const [loading, setLoading] = useState(false);
@@ -101,4 +101,4 @@ function collegedetails() {
   );
 }
 
-export default collegedetails;
+export default Collegedetails;

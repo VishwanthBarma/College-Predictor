@@ -3,7 +3,7 @@ import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import StudentForm from "../components/Predictor/StudentForm";
 
-function collegepredictor() {
+function Collegepredictor() {
   const router = useRouter();
   return (
     <div>
@@ -23,4 +23,4 @@ function collegepredictor() {
   );
 }
 
-export default collegepredictor;
+export default Collegepredictor;

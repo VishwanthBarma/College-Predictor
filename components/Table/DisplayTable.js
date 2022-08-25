@@ -1,19 +1,18 @@
 import { ThreeBounce } from "better-react-spinkit";
 import React, { useEffect, useState } from "react";
 
-export const DisplayTable = React.forwardRef(({ data }, ref) => {
+const DisplayTable = React.forwardRef(({ data }, ref) => {
   const [tableHeaders, setTableHeaders] = useState([]);
 
   useEffect(() => {
+    const getKeys = () => {
+      setTableHeaders(Object.keys(data[0]));
+    };
     getKeys();
   }, []);
 
-  const getKeys = () => {
-    setTableHeaders(Object.keys(data[0]));
-  };
-
   const RenderRows = ({ item }) =>
-    tableHeaders.map((value) => <td>{item[value]}</td>);
+    tableHeaders.map((value, index) => <td key={index}>{item[value]}</td>);
 
   return (
     <div className="r-h2 px-2 overflow-auto w-screen xl:flex xl:justify-center">
@@ -23,7 +22,7 @@ export const DisplayTable = React.forwardRef(({ data }, ref) => {
             <thead>
               <tr>
                 {tableHeaders.map((key, index) => (
-                  <th key={key}>{key.toUpperCase()}</th>
+                  <th key={index}>{key.toUpperCase()}</th>
                 ))}
               </tr>
             </thead>
@@ -46,3 +45,7 @@ export const DisplayTable = React.forwardRef(({ data }, ref) => {
     </div>
   );
 });
+
+App.displayName = "DisplayTable";
+
+export default DisplayTable;

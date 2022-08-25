@@ -65,8 +65,9 @@ function StudentForm() {
 
       <div className="flex flex-col space-y-3 justify-center text-center">
         {colleges.length != 0 &&
-          colleges.map((item) => (
+          colleges.map((item, index) => (
             <CollegeCard
+              key={index}
               code={item.inst_code}
               college_name={item.inst_name}
               branch_name={item.branch_name}
