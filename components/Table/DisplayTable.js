@@ -46,6 +46,6 @@ const DisplayTable = React.forwardRef(({ data }, ref) => {
   );
 });
 
-App.displayName = "DisplayTable";
+DisplayTable.displayName = "DisplayTable";
 
 export default DisplayTable;
