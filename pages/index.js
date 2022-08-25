@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>College Predictor</title>
         <meta
           name="description"
           content="TS-EAMCET-2022 College Predictor and Details"
