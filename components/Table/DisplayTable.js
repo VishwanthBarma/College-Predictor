@@ -16,7 +16,7 @@ export const DisplayTable = React.forwardRef(({ data }, ref) => {
     tableHeaders.map((value) => <td>{item[value]}</td>);
 
   return (
-    <div className="r-h2 px-2 overflow-auto w-screen">
+    <div className="r-h2 px-2 overflow-auto w-screen xl:flex xl:justify-center">
       <div ref={ref}>
         {tableHeaders.length != 0 ? (
           <table>
